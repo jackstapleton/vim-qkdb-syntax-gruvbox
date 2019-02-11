@@ -28,6 +28,23 @@ set iskeyword=@,^_,48-57,.
 " Operator
 syn match kOperator /[/\']/
 syn match kOperator /[/\']:/
+syn match kOperator ","
+syn match kOperator "\~"
+syn match kOperator "="
+syn match kOperator "<"
+syn match kOperator ">"
+syn match kOperator "+"
+syn match kOperator "-"
+syn match kOperator "*"
+syn match kOperator "%"
+syn match kOperator "-"
+syn match kOperator "&"
+syn match kOperator "|"
+syn match kOperator "_"
+syn match kOperator "?"
+syn match kOperator "$"
+syn match kOperator "!"
+
 
 " highlight Todo and friends in comments
 syn keyword kTodo TODO FIXME FIX XXX NOTE GOTCHA contained
@@ -68,7 +85,14 @@ syn match kBoolean /[01]\+b/
 " syn match kFunction /\.\a\.\a[a-zA-Z0-9]*/
 
 "Statement separator
+syn match kAssign ":"
 syn match kSeparator ";"
+syn match kBrackets "("
+syn match kBrackets ")"
+syn match kBoxBrackets "\["
+syn match kBoxBrackets "\]"
+syn match kBraces "{"
+syn match kBraces "}"
 
 " all the nulls and INFs
 syn keyword kSpecial 0N 0W 0n 0w
@@ -435,54 +459,54 @@ syn keyword qLib \.Q\.x2
 syn keyword qLib \.Q\.xy
 
 " hardcode the .z. functions (no way to get them automatically)
-syn match qLib "\.z\.D"
-syn match qLib "\.z\.K"
-syn match qLib "\.z\.N"
-syn match qLib "\.z\.P"
-syn match qLib "\.z\.T"
-syn match qLib "\.z\.W"
-syn match qLib "\.z\.Z"
-syn match qLib "\.z\.a"
-syn match qLib "\.z\.ac"
-syn match qLib "\.z\.b"
-syn match qLib "\.z\.bm"
-syn match qLib "\.z\.c"
-syn match qLib "\.z\.d"
-syn match qLib "\.z\.exit"
-syn match qLib "\.z\.f"
-syn match qLib "\.z\.h"
-syn match qLib "\.z\.i"
-syn match qLib "\.z\.k"
-syn match qLib "\.z\.l"
-syn match qLib "\.z\.n"
-syn match qLib "\.z\.o"
-syn match qLib "\.z\.p"
-syn match qLib "\.z\.pc"
-syn match qLib "\.z\.pd"
-syn match qLib "\.z\.pg"
-syn match qLib "\.z\.ph"
-syn match qLib "\.z\.pi"
-syn match qLib "\.z\.pm"
-syn match qLib "\.z\.po"
-syn match qLib "\.z\.pp"
-syn match qLib "\.z\.ps"
-syn match qLib "\.z\.pw"
-syn match qLib "\.z\.q"
-syn match qLib "\.z\.s"
-syn match qLib "\.z\.t"
-syn match qLib "\.z\.ts"
-syn match qLib "\.z\.u"
-syn match qLib "\.z\.vs"
-syn match qLib "\.z\.w"
-syn match qLib "\.z\.ws"
-syn match qLib "\.z\.wo"
-syn match qLib "\.z\.wc"
-syn match qLib "\.z\.x"
-syn match qLib "\.z\.z"
-syn match qLib "\.z\.zd"
+syn keyword qLib \.z\.D
+syn keyword qLib \.z\.K
+syn keyword qLib \.z\.N
+syn keyword qLib \.z\.P
+syn keyword qLib \.z\.T
+syn keyword qLib \.z\.W
+syn keyword qLib \.z\.Z
+syn keyword qLib \.z\.a
+syn keyword qLib \.z\.ac
+syn keyword qLib \.z\.b
+syn keyword qLib \.z\.bm
+syn keyword qLib \.z\.c
+syn keyword qLib \.z\.d
+syn keyword qLib \.z\.exit
+syn keyword qLib \.z\.f
+syn keyword qLib \.z\.h
+syn keyword qLib \.z\.i
+syn keyword qLib \.z\.k
+syn keyword qLib \.z\.l
+syn keyword qLib \.z\.n
+syn keyword qLib \.z\.o
+syn keyword qLib \.z\.p
+syn keyword qLib \.z\.pc
+syn keyword qLib \.z\.pd
+syn keyword qLib \.z\.pg
+syn keyword qLib \.z\.ph
+syn keyword qLib \.z\.pi
+syn keyword qLib \.z\.pm
+syn keyword qLib \.z\.po
+syn keyword qLib \.z\.pp
+syn keyword qLib \.z\.ps
+syn keyword qLib \.z\.pw
+syn keyword qLib \.z\.q
+syn keyword qLib \.z\.s
+syn keyword qLib \.z\.t
+syn keyword qLib \.z\.ts
+syn keyword qLib \.z\.u
+syn keyword qLib \.z\.vs
+syn keyword qLib \.z\.w
+syn keyword qLib \.z\.ws
+syn keyword qLib \.z\.wo
+syn keyword qLib \.z\.wc
+syn keyword qLib \.z\.x
+syn keyword qLib \.z\.z
+syn keyword qLib \.z\.zd
 
-"syn match kIdentifier "\<\a[a-zA-Z0-9]*\>"
-"syn match kIdentifier "\<[a-zA-Z\.][a-zA-Z0-9\.]*\>"
+syn match kIdentifier "\<\a[a-zA-Z0-9]*\>"
+syn match kIdentifier "\<[a-zA-Z\.][a-zA-Z0-9\.]*\>"
 syn match kPlaceholder "\<[xyz]\>"
 
 " Conditional and similar constructs
@@ -494,7 +518,7 @@ syn match kConditional /\.\[/me=e-1
 syn match kConditional /@\[/me=e-1
 
 " plist, view, global assign
-syn match Function /::/
+syn match kAssign /::/
 
 " Repeat
 syn keyword kRepeat do while
@@ -514,6 +538,7 @@ syn match kPreproc /`[spgu]#/
 " highlight all the special names used when `XXX$ casting data
 syn match kCast "\`\(boolean\|byte\|short\|int\|long\|real\|guid\|float\|char\|symbol\|timestamp\|month\|date\|datetime\|timespan\|time\|minute\|second\)\$\s*"
 syn match kCast "\`\(year\|week\|mm\|dd\|hh\|ss\|uu\)\$\s*"
+syn match kCast "\`\$\s*"
 
 " system cmd
 syn match kSyscmd "^\\\<\([12abBcCdeflopPrsStTuvwWxz_]\|cd\|ts\)\>"
@@ -526,33 +551,36 @@ syn match kCast /"\a"\$/
 
 if !exists("did_k_syntax_inits")
  let did_k_syntax_inits = 1
+ hi link kAssign GruvBoxRed 
  hi link kBoolean Boolean
+ hi link kBoxBrackets Normal
+ hi link kBraces Normal
  hi link kCast Type
  hi link kComment Comment
- hi link kConditional Conditional
- hi link kContext Directory
+ hi link kSpecialComment kComment
+ hi link kConditional PreProc
+ hi link kContext Normal
  hi link kError Error
- hi link kExit WarningMsg
- hi link kFunction Function
- hi link kGlobal Macro
- hi link kHandle TabLineSel
+ hi link kExit Normal
+ hi link kFunction Identifier
+ hi link kGlobal Normal 
+ hi link kHandle Constant 
  hi link kIdentifier Normal
- hi link kLang Pmenu
+ hi link kLang Normal
  hi link kNumber Number
- hi link kOperator Operator
+ hi link kOperator GruvBoxRed
  hi link kPlaceholder Normal
  hi link kPreproc PreProc
- hi link kPrimitive kFunction
+ hi link kPrimitive Primitive
  hi link kRepeat Repeat
  hi link kSeparator Normal
- hi link kSpecial Special
- hi link kSpecialChar SpecialChar
- hi link kSpecialComment Comment
+ hi link kSpecial Normal
+ hi link kSpecialChar Normal
  hi link kString String
- hi link kSyscmd PmenuSel
+ hi link kSyscmd Conditional
  hi link kSymbol Constant
  hi link kTodo Todo
- hi link qLib Special
+ hi link qLib Special 
  endif
 
 let b:current_syntax = "k"
