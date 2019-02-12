@@ -579,7 +579,7 @@ if !exists("did_k_syntax_inits")
  hi link kString String
  hi link kSyscmd Conditional
  hi link kSymbol Constant
- hi link kTodo Todo
+ hi link kTodo DiffChange
  hi link qLib Special 
  endif
 
