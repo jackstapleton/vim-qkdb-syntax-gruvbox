@@ -422,10 +422,12 @@ syn keyword qLib \.Q\.p1
 syn keyword qLib \.Q\.p2
 syn keyword qLib \.Q\.par
 syn keyword qLib \.Q\.pcnt
+syn keyword qLib \.Q\.PD
 syn keyword qLib \.Q\.pf
 syn keyword qLib \.Q\.pm
 syn keyword qLib \.Q\.ps
 syn keyword qLib \.Q\.pt
+syn keyword qLib \.Q\.PV
 syn keyword qLib \.Q\.q0
 syn keyword qLib \.Q\.qa
 syn keyword qLib \.Q\.qb
