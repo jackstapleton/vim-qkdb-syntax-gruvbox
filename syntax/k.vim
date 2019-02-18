@@ -95,10 +95,11 @@ syn match kBraces "{"
 syn match kBraces "}"
 
 " all the nulls and INFs
-syn keyword kSpecial 0N 0W 0n 0w
-syn match kSpecial "-0[wW]"
-syn match kSpecial "-0W[defhijmnptuvz]"
-syn match kSpecial "0[NW][defghijmnptuvz]"
+syn keyword kNull 0N 0W 0n 0w
+syn match kNull "-0[wW]"
+syn match kNull "-0W[defhijmnptuvz]"
+syn match kNull "0[NW][defghijmnptuvz]"
+syn match kNull "(::)"
 " GUIDs
 syn match kSpecial "[-[:xdigit:]]\{36}"
 
@@ -569,6 +570,7 @@ if !exists("did_k_syntax_inits")
  hi link kHandle Constant 
  hi link kIdentifier Normal
  hi link kLang Normal
+ hi link kNull Number
  hi link kNumber Number
  hi link kOperator GruvBoxRed
  hi link kPlaceholder Normal
