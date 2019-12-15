@@ -401,6 +401,7 @@ syn keyword qLib \.Q\.fl
 syn keyword qLib \.Q\.fmt
 syn keyword qLib \.Q\.foo
 syn keyword qLib \.Q\.fp
+syn keyword qLib \.Q\.fpn
 syn keyword qLib \.Q\.fs
 syn keyword qLib \.Q\.fsn
 syn keyword qLib \.Q\.ft
